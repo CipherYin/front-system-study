@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>课时1</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //Arguments对象；
+        //函数内部对应参数值的实参列表，对象，内置局部变量
+
+
+        function test(a,b,c){
+            args = [].slice.call(arguments)
+            console.log(args)
+            console.log(arguments.toString());
+            console.log(Array.isArray(arguments));
+            //callee是宿主函数test
+            console.log(arguments.callee);
+
+        }
+        test(1,2,3)
+
+
+    </script>
+</body>
+</html>
