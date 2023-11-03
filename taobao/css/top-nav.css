@@ -1,0 +1,89 @@
+body{
+    margin: 0;
+    font-family: tahoma,arial,'Hiragino Sans GB','\568b\4f53',sans-serif;
+    -webkit-font-smoothing: antialiashed;
+}
+ul,li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.layer{
+    width: 1190px;
+    margin: 0 auto;
+}
+.clearfix{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.site-nav-cover{
+    width: 100%;
+    min-height: 1190px;
+    border-bottom: 1px solid #eee;
+    background-color: #f4f4f4;
+}
+.site-nav-cover .site-nav-bd{
+    height: 35px;
+    font-size: 12px;
+}
+
+.site-nav-cover .site-nav-bd .site-nav-bd-l{
+    float: left;
+}
+
+.site-nav-cover .site-nav-bd .site-nav-bd-r{
+    float: right;
+}
+.site-nav-cover .site-nav-bd li{
+    height: 35px;
+    line-height: 35px;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu{
+    float: left;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu.site-nav-dd{
+    border-left: transparent;
+    border-right: transparent;
+    float: left;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu.site-nav-dd:hover{
+    border-left: 1px solid #eee;
+    border-right: 1px solid #eee;
+    background-color: #fff;
+}
+.site-nav-cover .site-nav-bd .site-nav-pip{
+    height: 35px;
+    line-height: 35px;
+    padding: 0 5px;
+    float: left;
+    color: #ccc;
+    font-size: 12px;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd{
+    padding: 0 6px;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd a,
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd a span,
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd span{
+    margin-right: 7px;
+    color: #6c6c6c;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd .deep{
+    color: #3c3c3c;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd .hl{
+    color: #ff5000;
+}
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd a span,
+.site-nav-cover .site-nav-bd .site-nav-menu .site-nav-menu-hd a:hover{
+    color: #ff5000;
+}
+.box{
+    width: 100%;
+    height: 121px;
+}

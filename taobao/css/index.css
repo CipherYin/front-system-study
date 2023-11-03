@@ -1,0 +1,146 @@
+body{
+    margin: 0;
+    background-color: #f4f4f4;
+}
+.clearfix{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.layer{
+    
+}
+
+.t-nav-cover{
+    width: 100%;
+    min-width: 1190px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #eee;
+}
+
+.t-nav-cover .site-nav{
+    width: 1190px;
+    height: 35px;
+    margin: 0 auto;
+    background-color: #000;
+}
+
+
+.t-main-cover{
+    width: 100%;
+    min-width: 1190px;
+    background-color: #fff;
+}
+
+.t-main-cover .main-belt{
+    width: 1190px;
+    height: 121px;
+    margin: 0 auto;
+    background-color: orange;
+}
+
+.main-nav-cover .main-nav{
+    width: 1190px;
+    height: 30px;
+    margin: 0 auto;
+    background-color: #ff5000;
+}
+
+.main-show-area{
+    width: 1190px;
+    margin: 0 auto;
+}
+
+.main-show-area  .main-area{
+    width: 900px;
+    float: left;
+    height: 632px;
+}
+.main-show-area  .main-area .main-show{
+    height: 522px;
+    margin-bottom: 10px;
+}
+
+.main-show-area  .main-area .main-show .nav-menu-list{
+    width: 190px;
+    height: 100%;
+    float: left;
+    background-color: blue;
+}
+.main-show-area .main-area .main-show .sliders-wrap{
+    width: 520px;
+    float: left;
+    height: 512px;
+    margin: 10px 0 0 10px;
+    background-color: pink;
+}
+.main-show-area .main-area .main-show .sliders-wrap .main-slider{
+    height: 280px;
+    background-color: yellowgreen;
+
+}
+.main-show-area .main-area .main-show .sliders-wrap .goods-slider{
+    height: 230px;
+    background-color: salmon;
+}
+.main-show-area .main-area .main-show .sliders-wrap .goods-slider .goods-slider-hd{
+    height: 18px;
+    padding-top: 10px;
+}
+.main-show-area .main-area .main-show .hot-sale-imgs{
+    float: left;
+    width: 160px;
+    height: 512px;
+    margin: 10px 10px 0 10px;
+}
+.main-show-area .main-area .main-show .hot-sale-imgs .t-img{
+    height: 280px;
+    background-color: green;
+}
+.main-show-area .main-area .main-show .hot-sale-imgs .b-img{
+    height: 230px;
+    background-color: yellow;
+}
+.main-show-area  .main-area .head-line{
+    width: 890px;
+    height: 100px;
+    margin-right: 10px;
+    background-color: green;
+}
+
+.main-show-area .funcs-area{
+    width: 290px;
+    float: left;
+    height: 632px;
+    margin-top: 10px;
+}
+
+.main-show-area .funcs-area .member{
+    height: 145px;
+    background-color: blue;
+}
+.main-show-area .funcs-area .member-tip{
+    height: 26px;
+    background-color: green;
+}
+.main-show-area .funcs-area .member-notice{
+    height: 108px;
+    background-color: #ff5000;
+}
+
+.main-show-area .funcs-area .member-funcs{
+    height: 232px;
+    background-color: #000;
+}
+.main-show-area .funcs-area .member-apps{
+    height: 111px;
+    background-color: pink;
+}
+
+.life-belt{
+    width: 1190px;
+    height: 166px;
+    background-color: #f40;
+    margin:  0 auto;
+}
