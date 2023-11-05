@@ -1,0 +1,11 @@
+.header-cover{
+    width: 100%;
+    height: 121px;
+    min-width: 1190px;
+    background-color: red;
+}
+
+.header-cover .header-bd{
+    height: 100%;
+    background-color: #ddd;
+}
