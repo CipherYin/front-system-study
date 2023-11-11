@@ -1,0 +1,36 @@
+.list-hd{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    background-color: orange;
+    color: #fff;
+    line-height: 44px;
+    text-align: center;
+}
+
+.container{
+    margin-top: 44px;
+}
+
+.bk-list .list-item{
+    position: relative;
+    height: 150px;
+    border-bottom: 1px solid #ddd;
+}
+
+.bk-list .list-item .item-lk{
+    height: 100%;
+    display: block;
+}
+
+.bk-list .list-item .bk-pic{
+    height: 150px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

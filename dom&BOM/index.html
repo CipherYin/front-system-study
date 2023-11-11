@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>课时1</title>
+
+    <style ref="stylesheet">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            background-color: blue;
+            height: 300px;
+            width: 300px;
+        }
+        .outer{
+            background-color: green;
+            height: 200px;
+            width: 200px;
+        }
+        .inner{
+            background-color: yellow;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
 </head>
 <body>
     <!-- 
@@ -33,6 +55,13 @@
         <a href="">我是超链接</a>
         <p>我是段落标签</p>
       </div> -->
+
+
+      <div class="wrapper">
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+      </div>
      <script type="text/javascript">
         /** var div = document.getElementsByTagName('div')[0]
         function elemChildren(node){
@@ -81,8 +110,46 @@
            //elem.onclick = function(){}
            //elem.addEventListener(时间类型，时间处理函数，false)
 
-           
+           //事件冒泡流
+           /** var wrapper = document.getElementsByClassName("wrapper")[0],
+                outer = document.getElementsByClassName("outer")[0],
+                inner = document.getElementsByClassName("inner")[0];
+            
+           wrapper.addEventListener('click',function(){
+                console.log('wrapper');
+           },false);
+           outer.addEventListener('click',function(){
+                console.log('outer');
+           },false);
+           inner.addEventListener('click',function(){
+                console.log('inner');
+           },false); **/
 
+           //事件捕获流
+           /**var wrapper = document.getElementsByClassName("wrapper")[0],
+                outer = document.getElementsByClassName("outer")[0],
+                inner = document.getElementsByClassName("inner")[0];
+            
+           wrapper.addEventListener('click',function(){
+                console.log('wrapper');
+           },true);
+           outer.addEventListener('click',function(){
+                console.log('outer');
+           },true);
+           inner.addEventListener('click',function(){
+                console.log('inner');
+           },true);**/
+
+           //事件流： 事件捕获阶段，处于目标阶段，事件冒泡阶段
+           
+           //DOM0: onXXX
+           //DOM1: 没有定义事件模型
+           //DOM2: addEventListener(3个参数)
+
+
+           //target srcElement -> 事件源对象
+
+           //事件委托与事件代理
      </script>
 </body>
 </html>
