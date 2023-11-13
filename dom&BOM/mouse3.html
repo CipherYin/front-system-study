@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼠标移动与事件代理</title>
+    <style type="text/css">
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+       
+        .box1{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>  
+    <div class="box">
+        <div class="box1"></div>
+    </div>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+        //鼠标的滑入和滑出 mouseover mouseout 对子元素也生效
+        var oBox = document.getElementsByClassName('box')[0],
+            oBox1 = document.getElementsByClassName('box1')[0],
+            overCount = 0,
+            ourCount = 0;
+
+        oBox.onmouseover = function(){
+            this.style.backgroundColor = 'green';
+        }
+        oBox.onmouseout = function(){
+            this.style.backgroundColor='orange';
+        }
+        oBox1.onmouseover = function(e){
+            cancelBubble(e);
+            this.style.backgroundColor = 'white';
+        }
+        oBox1.onmouseout = function(e){
+            cancelBubble(e);
+            this.style.backgroundColor = 'black';
+        }
+
+        //mouseenter mouseleave 只对当前元素生效
+    </script>
+</body>
+</html>

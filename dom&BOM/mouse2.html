@@ -16,15 +16,27 @@
             height: 100px;
             background-color: green;
         }
+        div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: orchid;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <a href="javascript:;"></a>
+
+    <div></div>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/mouse2.js"></script>
     <script type="text/javascript">
-        var oLink = document.getElementsByTagName("a")[0];
-        oLink.dragNclick(oLink,function(){
+        var oLink = document.getElementsByTagName("a")[0],
+            oMenu = document.getElementsByTagName("div")[0];
+        oLink.dragNclick(oMenu,function(){
             window.open("https://www.baidu.com")
         })
     </script>
