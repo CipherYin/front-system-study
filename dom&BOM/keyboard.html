@@ -5,19 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>贪吃蛇</title>
     <style type="text/css">
-
+        .wrap{
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            background-color: #000;
+            overflow: hidden;
+        }
+        .round{
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: green;
+        }
+        .round.head{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
     <!-- 
         keydown  keypress  keyup 
      -->
+     <div class="wrap"></div>
+    
 
 
-     <script type="text/javascript" src="css/common.css"></script>
+     <script type="text/javascript" src="js/common.js"></script>
+     <script type="text/javascript" src="js/keyboard.js"></script>
      <script type="text/javascript">
-
+       
         
+
      </script>
 
 </body>
