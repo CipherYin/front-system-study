@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则实例集合</title>
+</head>
+<body>
+    <input type="text"  id="test" >
+    <button onclick="test()">点击</button>
+    <script type="text/javascript">
+       var oTest =  document.getElementById('test');
+      /* function test(obj){
+        //var reg = /[^A-z0-9_]+/;
+        
+        //身份证 510726   2001 1030 0222
+        var reg = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|[1[0-2]])(([0-2][1-9])|([10|20|30|31]))\d{3}[1-9Xx]$/
+        obj.value = obj.value.replace(reg,'');
+       }*/
+       function test(){
+        
+        //身份证 510726   2001 1030 0222
+        var val = oTest.value,
+            reg = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|(10|20|30|31))\d{3}[1-9Xx]$/;
+            pass = reg.test(val)
+        console.log(val)
+        console.log(pass)
+       }
+    </script>
+</body>
+</html>
