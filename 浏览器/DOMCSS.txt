@@ -1,0 +1,37 @@
+
+HTML CSS javascript 
+dom树：将html结构变为一个树的结构; (深度优先解析原则)
+          html
+   head              body
+meta title         div   ul
+                   h1    li
+
+
+
+解析：解析dom树
+>
+加载: 加载img 等资源
+
+
+CSS树：样式结构体；跟DOM树相差不大，也是深度优先解析原则
+
+渲染树: renderTree = dom树 + css树; 绘制页面
+
+        1. 每个节点都有自己的样式
+        2. 不包含display: none(dom树包含);html和 head,title之类不需要绘制的节点
+        3. visibility: hidden   是包含在渲染树上的，layout布局
+        4. 渲染树上的每一个节点都会当作一个盒子box;具有内容填充，渲染，边框，位置，大小，其他样式
+
+回流reflow与重绘repaint
+当JS对页面的节点操作时，就会产生回流+重绘或者repaint
+
+回流一定会repaint
+
+回流-> 因为节点的尺寸，布局，display:none block;这一些改变的时候，渲染树中的一部分或者全部需要重新构建
+    引起回流因素：DOM节点的增加删除，位置变化，尺寸边距，边框， DOm节点display显示与否；页面渲染初始化；浏览器窗口尺寸变化；向浏览器请求某些样式信息：offset,scroll,client,width,height,currentstyle,getComputedStyle()
+重绘-> 
+
+
+
+
+
