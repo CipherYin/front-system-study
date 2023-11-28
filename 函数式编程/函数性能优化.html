@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数性能优化、缓存函数、函数记忆应用 </title>
+</head>
+<body>
+    <script type="text/javascript">
+        // 函数记忆 -> 函数优化 -> 缓存函数memorize
+        // 阶乘
+        // n! = n*(n-1)!
+        //6! = 5*4*3*2*1
+        //0! = 1
+        //n! = n*(n-1)*......*2*1
+
+        var times = 0;
+        function factorial(n){
+            times++;
+            if(n === 0|| n===1){
+                return 1;
+            }
+            return n * factorial(n-1);
+        }
+
+        console.log(factorial(6));
+
+        for(var i=0;i<=6;i++){
+            console.log(factorial(i));
+        }
+        console.log(times)
+
+        
+        var times = 0,
+            cache = [];
+        
+        function factorial(n){
+            times++;
+            if(cache[n]){
+                return cache[n];
+            }
+            if(n ===0 || n===1){
+                    cache[0] = 1;
+                    cache[1] = 1;
+                    return 1;
+            }
+            return cache[n] = n*factorial(n-1);
+            
+        }
+
+        function memorize(fn){
+            var cache = {};
+
+            return function(){
+                var k = arguments.length + [].join.call(arguments,',');
+                
+            }
+        }
+
+        var f = memorize(factorial);
+        console.log(f(6))
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探究bind和call和apply的区别、重写bind方法</title>
+</head>
+<body>
+    <script type="text/javascript">
+        //1. call bind (apply)
+        var p1 = {
+            name: '张三',
+            hobby: this.hobby,
+            paly: function(sex,age){
+                console.log('年龄为 '+age+'岁，性别为：'+sex+" 的"+
+                    this.name+'喜欢'+
+                    this.hobby
+                );
+            }
+        }
+
+        var p1 = {
+            name: '李四',
+            hobby: '踢足球',
+        }
+        p1.paly.call(p2,'男',20);
+        //call改变this执行斌切立即执行
+       p1.paly.apply(p2,['男',20]);
+       //apply不改变this执行，只是借用属性
+        p1.paly.bind(p2,'男',20)();
+        // bind改变this指向后返回一个函数，不执行
+        //bind -> function.prototype
+    </script>
+</body>
+</html>

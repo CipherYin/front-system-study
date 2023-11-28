@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS运动</title>
+    <style type="text/css">
+        .box{
+            position: absolute;
+            left: 0px;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        span{
+            position: absolute;
+            left: 300px;
+            top: 0px;
+            width: 1px;
+            height: 100px;
+            background-color: black;
+        }
+
+        button{
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <span></span>
+    <button>button</button>
+
+    <script type="text/javascript">
+        var oDiv = document.getElementsByClassName('box')[0],
+            oBtn = document.getElementsByTagName('button')[0],
+            timer = null;
+        //点击button,进行匀速运动
+
+        oBtn.onclick = function(){
+           startMove(oDiv,300);
+        }
+
+        function startMove(dom,target){
+            var iSpead = null; 
+            clearInterval(timer);
+            timer = setInterval(function(){
+                iSpead = (target - dom.offsetLeft)/7;
+                iSpead = iSpead > 0?Math.ceil(iSpead):Math.floor(iSpead);
+               
+                if(dom.offsetLeft === target){
+                    clearInterval(timer)
+                }else{
+                    dom.style.left = dom.offsetLeft + iSpead +'px';
+                }
+            },30);
+        }
+        
+    </script>
+</body>
+</html>

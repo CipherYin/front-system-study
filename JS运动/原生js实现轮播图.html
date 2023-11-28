@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS原生实现轮播图</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+</head>
+<body>
+    <div class="slider">
+        <ul class="slider-ul clearfix" id="sliderUl">
+            <li>
+                <a href="javascript:;">
+                    <img src="img/1.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="img/2.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="img/3.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="img/4.png" alt=""/>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="img/1.png" alt=""/>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="tab-ul clearfix" id="tabUl">
+            <li>
+                <div class="cur"></div>
+            </li>
+            <li>
+                <div></div>
+            </li>
+            <li>
+                <div></div>
+            </li>
+            <li>
+                <div></div>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript">
+        ;(function(){
+            let Slider = function(){
+                this.sliderUl = document.getElementById("sliderUl");
+                this.tabUl = document.getElementById('tabUl');
+                this.tabItem = Array.prototype.slice.call(tabUl.getElementsByTagName('div'));
+                this.timer = null;
+                this.index=0;
+                this.tabLength = this.tabItem.length;                
+            }
+            Slider.prototype = {
+                init(){
+                    this.autoPlay();
+                },
+                autoPlay(){
+                    var _self = this;
+                    this.timer = setInterval(function(){
+                        _self.sliderAction();
+                    },3000)
+                },
+                sliderAction(){
+                    var _self = this;
+
+                    this.tabItem.forEach(function(item){
+                        item.className = ''
+                    })
+                    if(this.index==4){
+                        startMove(this.sliderUl,{
+                            left: -this.index * 1200
+                        },function(){
+                            _self.index=0;            
+                            _self.sliderUl.style.left='0px';
+                            _self.tabItem[_self.index].className = 'cur';
+                        })
+                                               
+                    }else{
+                        startMove(this.sliderUl,{
+                            left: -this.index * 1200
+                        })
+                        _self.tabItem[_self.index].className = 'cur'
+                    }   
+                    this.index++;   
+                }
+            }
+            new Slider().init()
+
+
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重力运动与拖拽效果</title>
+    <style type="text/css">
+    #btn{
+        position: absolute;
+
+        top: 0;
+    }
+    .box{
+        position: absolute;
+        float: left;
+        background-color: red;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        top: 200px;
+    }
+    .box1{
+        left: 0px;
+    }
+    .box2{
+        left: 50px;
+    }
+    .box3{
+        left: 100px;
+    }
+    .box4{
+        left: 150px;
+    }
+    .box5{
+        left: 200px;
+    }
+    </style>
+</head>
+<body>
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <div class="box box3"></div>
+    <div class="box box4"></div>
+    <div class="box box5"></div>
+    <button id="btn">开始运动</button>
+    <script type="text/javascript" src="js/utils.js"> </script>
+
+    <script type="text/javascript">
+
+        let btn = document.getElementById('btn'),
+            oBoxs = document.getElementsByClassName('box'),
+            //boxs = Array.prototype.slice.call(oBox);
+            boxs = [].slice.call(oBoxs),
+            idx=0;
+
+            btn.onclick = function(){
+                let t = setInterval(function(){
+                    gravityMove({
+                        obj: boxs[idx++]
+                    })
+
+                    if(idx===boxs.length){
+                        clearInterval(t);
+                    }
+                },1000)
+            }
+        function gravityMove(json){
+            //垂直方向
+            var obj = json.obj,
+                curY = parseInt(getStyles(obj,'top')),
+                curX = parseInt(getStyles(obj,'left')),
+                height = parseInt(getStyles(obj,'height')),
+                width = parseInt(getStyles(obj,'width')),
+
+            activeHeight = Number(json.activeHeight)||getViewportSize().height;
+            activeWidth = Number(json.activeWidth)||getViewportSize().width;
+
+                var stepY = 0,
+                    stepX = 0
+                    top1=0,
+                    left=0,
+                    k=.9,
+                    i=0;
+            if(obj.timer){
+                return;
+            }
+          
+            obj.timer = setInterval(function(){
+                curY = parseInt(getStyles(obj,'top'));
+                curX = parseInt(getStyles(obj,'left'));
+                //模拟重力
+                stepY += 5;
+
+                //向右滚
+                stepX +=2;
+
+                top1 = curY + stepY;
+                left = curX + stepX;
+                if(left>=activeWidth-width){
+                    left = activeWidth-width;
+                }
+                if(left === activeWidth-width){
+                    stepX = -stepX;
+                }
+                if(top1>=activeHeight-height){
+                    top1 = activeHeight-height;
+                }
+                if(top1=== activeHeight-height){
+                    i++;
+                    stepY = -stepY * k;
+                    if(i===20){
+                        clearInterval(obj.timer)
+                        obj.timer = null
+                    }
+                }
+                obj.style.top = top1+'px';
+                obj.style.left = left+'px';
+                console.log(top1)
+
+            },50)
+        }
+    </script>
+</body>
+</html>

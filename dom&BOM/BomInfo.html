@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+</head>
+<body>
+    <!-- 
+        BOM的组成：
+            window: window对象上直接定义的属性和方法；
+            navigator: 浏览器的信息；
+            history: 浏览器当前窗口访问的历史记录；
+            location: 获取当前页面的地址信息、页面重定向等
+            screen: 浏览器屏幕的相关信息
+            frames: 框架相关的信息获取和操作
+     -->
+
+     <p>窗口<span id="status">关闭</span>状态</p>
+
+     <button onclick="openWin()">打开窗口</button>
+     <button onclick="closeWin()">关闭窗口</button>
+
+     <script type="text/javascript">
+        var win,
+            oStatus = document.getElementById('status');
+
+        function openWin(){
+            //url;name;style;true:主窗口的历史记录替换成新的，fasle：主窗口历史记录新增一条
+            win = window.open('','','width=500,height=500');
+            checkStatus();
+        }
+        function closeWin(){
+            win.close();
+            checkStatus();
+        }
+        function checkStatus(){
+            if(win.closed){
+                oStatus.innerHTML='关闭';
+            }else{
+                oStatus.innerHTML='打开';
+            }
+        }
+
+        function openAlert(){
+            window.alert('你吃饭了吗? ');
+        }
+
+        function openConfirm(){
+            //取消false;确定true
+            var c = window.confirm('您是女性吗？');
+            document.write(c?'我是一名女性':'我是一名男性');
+        }
+
+        function openPrompt(){
+            var num1 = Number(window.prompt('请填写第一个数字')),
+                num2 = Number(window.prompt('请填写第二个数字'));
+
+            console.log(num1+num2);
+        }
+     </script>
+
+     <script type="text/javascript">
+        function checkBrowser(){
+            var userAgent = navigator.userAgent;
+            if(userAgent.indexOf('Opera')>-1){
+                return 'Opera';
+            }
+            if(userAgent.indexOf('Firefox')>-1){
+                return 'FireFox';
+            }
+            if(userAgent.indexOf('Chrome')>-1){
+                return 'Chrome';
+            }
+            if(userAgent.indexOf('Safari')>-1){
+                return 'Safari';
+            }
+            //兼容的并且
+            if(userAgent.indexOf('compatible')>-1 && userAgent.indexOf('MSIE')>-1 && userAgent.indexOf('Opera')===-1){
+                return 'IE';
+            }
+        }
+        
+     </script>
+</body>
+</html>

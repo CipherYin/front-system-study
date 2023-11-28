@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加速度与弹性运动</title>
+
+   <style type="text/css">
+    #box{
+        height: 50px;
+        width: 50px;
+        background-color: pink;
+        position: absolute;
+        left: 0px;
+        top: 100px;
+    }
+
+    .line{
+        background-color: red;
+        width: 1px;
+        height: 50px;
+        position: absolute;
+        left: 250px;
+        top: 100px;
+    }
+   </style>
+</head>
+<body>
+    <button id="btn">弹性运动</button>
+
+    <div id="box"></div>
+    <div class="line"></div>
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript">
+        let btn = document.getElementById('btn'),
+            oBox = document.getElementById('box');
+        
+        btn.onclick = function(){
+            elasticMove({
+                obj: oBox,
+                target: 250,
+            })
+        }
+
+        function elasticMove(json){
+            var obj = json.obj,
+                attr = json.attr || 'left',
+                target = json.target || 250,
+                //步长
+                step = 0,
+                k = json.k ||  .7,
+                z = json.z || .9,
+                len = target;
+            var cur = parseInt(getStyles(obj,attr));
+            
+            if(!obj.timers){
+                obj.timers = {}
+            }
+
+            obj.timers[attr] = setInterval(function(){
+                    cur = parseInt(getStyles(obj,attr));
+                    
+                    //弹性距离；距离越近，弹性越小
+                    len = target - cur;
+
+                    //弹性系数
+                    step += len*k;
+
+                    //阻力系数
+                    step = step*z;
+
+                    obj.style[attr] = cur + step +'px';
+
+                    if(Math.round(step)===0 && Math.round(len)===0){
+                        obj.style[attr] = target +'px';
+                        clearInterval(obj.timers[attr]);
+                        obj.timers[attr] = null
+                    }
+
+            },50)
+
+        }
+    </script>
+</body>
+</html>

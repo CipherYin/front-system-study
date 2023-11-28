@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业级异步加载</title>
+    <script type="text//javascript">
+
+    </script>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        /**
+            异步加载 JS脚本 -> 浏览器帮我们做的
+            
+        */
+        // 自己写一个异步加载;
+        //进行异步加载的script; 不要出现对document进行操作的 async； 完全不操作dom的都可以用async异步加载
+        // async和defer同时出现时，ie9及以上都认async;
+        //defer是 IE4~iE8
+        //async: wc3,html5属性，ie9及以上支持；
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        //s.async = true;
+        s.src = 'js/异步加载1.js'
+        //执行
+        document.body.appendChild(s)
+        //主动创建就是异步加载
+        //会阻塞 window.onload
+
+        //那么就可以把异步加载放进onload里
+        function async_load(){
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            //s.async = true;
+            s.src = 'js/异步加载1.js'
+            //执行
+            document.body.appendChild(s)
+        }
+
+        if(window.attachEvent){
+            window.attachEvent('onload',async_load);
+        }else {
+            window.addEventListener('load',async_load,false);
+        }
+        //--------------------------异步加载一般放入head标签;企业级写法的异步加载
+        (function(){
+            function async_load(){
+                var s = document.createElement('script'),
+                    oScript = document.getElementsByTagName('script')[0];
+                s.type = 'text/javascript';
+                //s.async = true;
+                s.src = 'js/异步加载1.js'
+                //执行
+                oScript.parentNode.insertBefore(s,oScript);
+            }
+    
+            if(window.attachEvent){
+                window.attachEvent('onload',async_load);
+            }else {
+                window.addEventListener('load',async_load,false);
+            }
+        }
+          )();
+    </script>
+</body>
+</html>
+

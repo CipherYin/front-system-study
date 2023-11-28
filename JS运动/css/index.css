@@ -1,0 +1,71 @@
+html,
+body{
+    margin: 0;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+.slider{
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    margin: 100px auto;
+    overflow: hidden;
+}
+.slider-ul{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6000px;
+    height: 300px;
+}
+.slider-ul li{
+    float: left;
+    width: 1200px;
+    height: 300px;
+}
+
+.tab-ul{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 160px;
+    height: 30px;
+    background-color: pink;
+    margin-left: -80px;
+    border-radius: 15px;
+}
+
+.tab-ul li{
+    float: left;
+    width: 40px;
+    height: 30px;
+   
+}
+
+.tab-ul li div{
+    width: 10px;
+    height: 10px;
+    margin: 10px 0 10px 15px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.tab-ul li div.cur{
+    background-color: aqua;
+}

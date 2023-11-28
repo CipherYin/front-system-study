@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS运动</title>
+    <style type="text/css">
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    
+    <script type="text/javascript">
+        var box = document.getElementsByClassName('box')[0],
+            timer = null;
+        box.onclick = function(){
+            //style  = getStyles(this,'opacity');
+            //console.log(style)
+            startMove(this,20)
+        }
+        function startMove(dom,target){
+
+            var iSpead = null,
+                iCur = null; 
+            clearInterval(timer);
+            timer = setInterval(function(){
+                iCur = parseFloat(getStyles(dom,'opacity'))*100;
+                iSpead = (target - iCur)/7;
+                iSpead = iSpead > 0?Math.ceil(iSpead):Math.floor(iSpead);
+               
+                if(iCur === target){
+                    clearInterval(timer)
+                }else{
+                    dom.style.opacity = (iCur + iSpead)/100 ;
+                }
+            },30);
+        }
+        
+        function getStyles(elem,prop){
+            //iE9以上的版本
+            if(window.getComputedStyle){
+                if(prop){
+                    //null 是伪元素
+                    return window.getComputedStyle(elem,null)[prop];
+                }else{
+                    window.getComputedStyle(elem,null);
+                }
+            }else{
+                if(prop){
+                    return elem.currentStyle[prop];
+                }else{
+                    return elem.currentStyle;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

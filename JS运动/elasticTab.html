@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果冻弹窗</title>
+    <style type="text/css">
+        #nav{
+            position: relative;
+            width: 600px;
+            text-align: center;
+            font-weight: bold;
+            color: #fff;
+        }
+        .navItem{
+            float: left;
+            width: 120px;
+            line-height: 30px;
+            background-color: #678;
+            text-decoration: none;
+            border-right: 1px solid #fff;
+            box-sizing: border-box;
+            color: #fff;
+        }
+
+        #navActive{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 30px;
+            background-color: rgba(0,0,0,.4);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <a href="javascript:;" class="navItem">首页</a>
+        <a href="javascript:;" class="navItem">精华</a>
+        <a href="javascript:;" class="navItem">候选</a>
+        <a href="javascript:;" class="navItem">新闻</a>
+        <a href="javascript:;" class="navItem">关注</a>
+
+        <div id="navActive"></div>
+    </div>
+
+
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript">
+        
+
+
+        function elasticMove(json){
+            var obj = json.obj,
+                attr = json.attr || 'left',
+                target = json.target ,
+                //步长
+                step = 0,
+                k = json.k ||  .9,
+                z = json.z || .7,
+                len = target;
+            var cur = parseInt(getStyles(obj,attr));
+            if(isNaN(Number(target))){
+                target = 700
+            }else{
+                target = Number(target)
+
+            }
+            if(!obj.timers){
+                obj.timers = {}
+            }
+
+            if(obj.timers[attr]){
+                return;
+            }
+
+            obj.timers[attr] = setInterval(function(){
+                    cur = parseInt(getStyles(obj,attr));
+                    
+                    //弹性距离；距离越近，弹性越小
+                    len = target - cur;
+
+                    //弹性系数
+                    step += len*k;
+
+                    //阻力系数
+                    step = step*z;
+
+                    obj.style[attr] = cur + step +'px';
+
+                    if(Math.round(step)===0 && Math.round(len)===0){
+                        obj.style[attr] = target +'px';
+                        clearInterval(obj.timers[attr]);
+                        obj.timers[attr] = null
+                    }
+
+            },20)
+
+        }
+        let OList = document.getElementsByClassName('navItem'),
+            list = Array.prototype.slice.call(OList),
+            nav = document.getElementById('nav'),
+            navActive = document.getElementById('navActive');
+        addEvent(nav,'mousemove',function(ev){
+            let e = ev ||window.event,
+                tar = e.target || e.srcElement;
+            if(tar.tagName.toLowerCase()=='a'){
+                let index = list.indexOf(tar);
+
+                elasticMove({
+                    obj: navActive,
+                    target: index*120
+                })
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
