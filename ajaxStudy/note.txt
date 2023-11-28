@@ -1,0 +1,41 @@
+1. 浏览器与服务器之间的通信基础是HTTP协议
+
+2. 用户通过网址或表单向服务器提交请求，服务器向浏览器发送相应的响应
+
+3. ajax是Javascript发起HTTP通信
+
+4. javascript异步通信： 请求服务器返回XML文档（演示），前端从XML文档中提取数据，再在不刷新整个页面的基础上，渲染到网页相应的位置
+
+5. XMLHTTPARequest 和 Active(ie5,ie6)对象：都是发送ajax请求的根部对象;
+
+    js脚本发送HTTP请求必须通过XMLHttpRequest请求
+    也
+    是通过ajax进行浏览器与服务器通信的接口
+    也不局限于xml, 可以发送任何格式的数据
+
+6. XMLHttpRequest本身是一个js引擎内置的构造函数；所有XMLHttpRquest对象都需要被实例化 var xhr = new XMLHttpRequest();
+
+兼容性：IE5/IE6 使用ActiveX对象 var xhr = new ActiveXObject('Microsoft.XMLHTTP')
+
+open方法（发送设置）: 参数列表：method,url,async,
+send()： 发送请求: 参数格式：a=1&b=2&c=3; xhr.setRequestHeader('Content-type": "application/x-www-form-urlencoded")
+
+xhr.open('GET','http://baidu.com/',true)
+
+ajax-> 发送请求时的响应任务
+onreadystatechange事件：挂载到XMLHttpRequest对象上的事件
+readyState状态：通过XMLHttpRequest对象发送HTTP请求的各阶段状态码(0-4)
+status状态： 服务器响应的状态码(200 ok、404未找到页面)
+
+当readyState变化时，将触发onreadystatechange事件执行其回调函数
+
+0: 请求未初始化
+1: 服务器连接已建立
+2: 请求已接受
+3: 请求处理中
+4: 请求已完成，且响应已就绪
+
+注意： readyState仅仅是针对请求与响应的状态码，获取资源是否成功取决于status的状态
+
+AJAX- 服务器响应：responseText: 获取字符串数据; responseXML: 获取XML数据
+
