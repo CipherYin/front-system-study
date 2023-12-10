@@ -1,0 +1,41 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong{
+    margin: 0;
+    font-weight: normal;
+}
+a{
+    text-decoration: none;
+}
+
+textarea,
+button{
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.comment-edit-bd{
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.comment-edit-bd .mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.comment-edit-bd .comment-wrap{
+    position: fixed;
+}
