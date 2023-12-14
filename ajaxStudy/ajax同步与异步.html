@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX版本，响应状态，超时设置、同步与异步</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var xhr;
+
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }else{
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onloadstart = function(){
+            console.log('loadstart')
+        }
+        xhr.ontimeout = function(){
+            xhr.abort();
+            xhr = null;
+        }
+        xhr.onreadystatechange = function(){
+            console.log(xhr.status , shr.statusText);
+            if(xhr.readyState === 4 && xhr.status === 200){
+                console.log('success');
+            }
+        }
+        //  x x 异步/同步
+        xhr.open('POST','http://localhost/network/calss7/server/get_courses.php',true);
+        xhr.timeout = 30000;
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.send('status=1&flag=2')
+    </script>
+</body>
+</html>

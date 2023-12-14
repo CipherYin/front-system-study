@@ -39,3 +39,164 @@ status状态： 服务器响应的状态码(200 ok、404未找到页面)
 
 AJAX- 服务器响应：responseText: 获取字符串数据; responseXML: 获取XML数据
 
+
+7. XMLHttpRequest版本: 标准版本分为 Level1和Level2
+
+Level1缺点:
+    * 无法发送跨域请求
+    * 不能获取非纯文本的数据
+    * 无法获取传输速度
+
+Level2改进：
+    * 可以发送跨域请求
+    * 支持获取二进制数据（非纯文本数据）
+    * 支持上传文件
+    * formData对象
+    * 可以获取传输进度
+    * 可以设置超时时间
+
+跨域问题：
+    www.baidu.com -> 文件夹 ->子站点文件夹
+    搜索  www.baidu.com/search              www.baidu.com
+    知道  www.baidu.com/zhidao               zhidao.baidu.com
+    图片 www.baidu.com/picture              picture.baidu.com
+    贴吧 www.baidu.com/tieba/index.html        tieba.baidu.com 
+                                                四个文件夹；不同服务器；不同的站点；
+    www: 网页访问传输协议
+
+    同源站点：协议一样，域名一样，端口一样；相互访问站点
+
+    不同域名，需要不同的解析，不可以相互访问对方资源和api接口；要进行域名操作
+
+
+兼容性问题：
+    IE8/9/Opara Mini不支持xhr对象
+    IEIO/I I不支持响应类型为JSON
+    部分浏览器不支持超时设置
+    部分浏览器不支持blob(文件对象的二进制数据   )
+
+
+AJAX - 状态码与状态提示
+xhr.status/xhr.statusText: 服务器回应的HTTP状态码/服务器发送的状态提示
+
+* 200, OK,访问正常
+* 301, Moved Pernmanently, 永久移动
+* 302, Moved temporaryly, 暂时移动
+* 304,Not Modified, 未修改
+* 307, Temporary Redirect,暂时重定向
+* 401, Unauthorized, 未授权
+* 403, Forbidden, 禁止访问
+* 404, Not Found, 未发现指定网址
+* 500, Internal Server Error, 服务器发生错误    
+
+
+AJAX- 五个事件
+xhr.onloadstart: 绑定HTTP请求发出的监听函数
+xhr.onerror: 绑定请求失败的监听函数(修改封装的AJAX)
+xhr.onload: 绑定请求成功完成的监听函数
+xhr.onabort: 绑定请求终止（调用了abort()方法）的监听函数
+xhr.onloadend: 绑定请求完成（不管成功与失败）的监听函数
+
+loadstart -> readyState === 4 ->load/error/abort / -> loadend
+
+AJAX- 请求超时
+
+xhr.timeout: 多少毫秒后，如果请求仍然没有得到结果，就会自动终止。如果该属性等于0，就表示没有时间限制
+xhr.ontimeout: 绑定请求超时一个监听函数，如果发生timeout事件，就会执行这个监听函数
+
+AJAX - 异步与同步
+
+async的值
+
+异步(默认) (async = true): Ajax 异步发送请求时，不影响页面加载，用户操作以及AJAX程序后的程序执行
+
+同步(async = false): AJAX同步发送请求时，浏览器必须等到请求完成并响应成功后，AJAX程序后续的程序才会执行
+
+解决同步异步配置的问题
+
+
+AJAX-datatype:
+    返回的数据类型
+    JSON TEXT XML -> 解决如何正确返回响应格式的数据   xhr.responseXML 返回类型为XML
+
+AJAX - 6种跨域获取数据的方法
+    源（域名）：协议 + 域名 + 端口
+    同源：相同的协议 && 相同的域名 && 相同的端口
+    不同源（跨域）： 不同的协议 ｜｜ 不同的域名 ｜｜不同的端口
+    
+    同源策略只针对浏览器（客户端）
+    跨域之1: 服务器中转请求
+        浏览器先把请求 发送给 同源服务端程序  ；同源服务端 请求 不同源服务器；然后依次返回
+
+    前提：基础域名必须一致
+    跨域之2：设置基础域名 + IFRAME
+        客户端浏览器设置 document.domain = 'jsplusplus.com
+        不同源客户端浏览器设置 document.domain = 'jsplusplus.com'
+        客户端浏览器引入  不同源客户端浏览器 的iframe
+        利用iframe窗口对象发送请求  到不同源服务端程序（与 不同源客户端浏览器是同源的）
+
+
+    跨域之3: window.name+IFRAME
+        window.name的特点：
+            1. 每个浏览器窗口都有一个全局变量window(包含iframe框架contentWindow)
+            2. 每个window对象都有一个name属性(注意： 一个窗口只有一个name属性)
+            3. 该窗口被关闭前（生命周期内），所有页面共享一个name属性并且有读写的权限
+            4. 无论该窗口在被关闭前，载入什么页面，都不会改变
+            5. 存储约为2M的字符串
+            6. 如果父级窗口地址源和iframe的地址源不同，父级无法通过iframe.contentWindow.name获取值，但iframe内部不受该规则限制
+
+            解决方案：先让iframe中的页面程序保存window.name，然后跳转与父级窗口同源的另一个页面，父级页面可以从当前
+            的iframe拿到该页面的window.name
+            iframe              iframe跳转              父级拿window.name        
+            与父级不同源的地址       --->     iframe       --->         iframe
+            设置共享window.name             与父级同源的地址          与父级同源的地址     
+            
+    跨域之4: postmessage+iframe
+        不常用原因：
+                1、伪造数据端漏洞 
+                2、xss攻击
+                3、兼容性问题
+        变量参数：otherWindow.postMessage(message, targetOrigin)
+                   otherWindow: 接收方的引用(被发送)
+                   message: 要发送到接受方的数据
+                   targetOrigin: 接收方的源，还有必须要有监听message事件
+    跨域之5 – hash+iframe
+            基本原理：利用url的hash值 #xxx来传递数据
+            基础工具：location.hash
+
+    跨域6 - cors跨域
+          跨域资源共享（Cross-origin resource sharing）
+
+          任意域名： header("Access-Control-Allow-Origin:*");
+          单域名：header("Access-Control-Allow-Origin: http://test2.jsplusplus.com")
+          多域名：$allowed_origins = array('http://test2.jsplusplus.com', 'http://test3.jsplusplus.com');
+                     header("Access-Control-Allow-Origin: ".$allowed_origins);
+            
+            通知服务器在真正的请求中会采用哪种 HTTP 方法
+            header("Access-Control-Request-Methods:GET,POST");
+
+    跨域6 - JSONP原理
+        利用 <script> 标签没有跨域限制的漏洞，网页可以得到从其他来源动态产生的 JSON 数据。JSONP请求一定需要对方的服务器做支持才可以。
+        
+        JSONP和AJAX对比
+        JONP和AJAX相同，都是客户端向服务器端发送请求，从服务器端获取数据的方式。但AJAX属于同源策略，JSONP属于非同源策略（跨域请求）
+        JSONP优点是简单兼容性好，可用于解决主流浏览器的跨域数据访问的问题。缺点是仅支持get方法具有局限性,不安全可能会遭受XSS攻击。
+
+        JSONP的实现流程
+        声明一个回调函数，其函数名(如show)当做参数值，要传递给跨域请求数据的服务器，函数形参为要获取目标数据(服务器返回的data)。
+        创建一个<script>标签，把那个跨域的API数据接口地址，赋值给script的src,还要在这个地址中向服务器传递该函数名（可以通过问号传参:?callback=show）。
+        服务器接收到请求后，需要进行特殊的处理：把传递进来的函数名和它需要给你的数据拼接成一个字符串,例如：传递进去的函数名是show，它准备好的数据是show('我不爱你')。
+        最后服务器把准备的数据通过HTTP协议返回给客户端，客户端再调用执行之前声明的回调函数（show），对返回的数据进行操作。
+
+        客户端期望返回的：{"name":"j","age":"18"}
+        JSONP实际返回的： callback({"name":"Jacky","age":"18"})
+   
+跨域链接： https://juejin.cn/post/6844903882083024910
+
+同源策略谁不被限制：
+    1. img的src引入不同的
+    2. link的href引入不同的
+    3.iframe的src
+    3. script的Src
+
+

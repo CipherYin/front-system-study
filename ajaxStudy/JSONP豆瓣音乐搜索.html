@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSONP跨域</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">点击跨域</button>
+</body>
+<script>
+    $('#btn').click(function () {
+      var frame = document.createElement('script');
+      frame.src = 'http://localhost:3006/getdata?name=leo&age=30&callback=func';
+      $('body').append(frame);
+    });
+  
+    function func(res) {
+      alert(res.message + res.name + '你已经' + res.age + '岁了');
+    }
+  </script>
+
+</html>

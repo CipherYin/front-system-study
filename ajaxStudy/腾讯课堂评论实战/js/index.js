@@ -23,7 +23,12 @@
         oSubmitBtn.addEventListener('click',Comment.submitComment.bind(Comment,userId),false)
         oRadioTabs.addEventListener('click',Comment.radioTabClick.bind(Comment),false);
     }
-// 全局变量注入
+    init();
+    return {
+        
+    }
+    
+    // 全局变量注入
 })(document,initCommentModule);
 
 //如果一个模块有很多子模块；
