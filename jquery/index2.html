@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li>1</li>
+            <li class="special-item">2</li>
+            <li class="special-item">3</li>
+        </ul>
+    </div>
+    <ul>
+        <li>1</li>
+        <li class="special-item">2</li>
+        <li class="special-item">3</li>
+    </ul>
+
+    <input type="text" value="女王节" name="text1"/>
+    <input type="checkbox" value="测试" name="text2"/>
+
+    <form action="">
+        <input type="text" name="text1" value="abc"/>
+        <input type="text" name="text2" value="ddd"/>
+        <input type="text" name="text3" value="efg"/>
+    </form>
+
+
+    <div>
+        <p>一段文字</p>
+        <button>点击变化</button>
+        <p>一段文字</p>
+    </div>
+
+    <div>
+        <h1>喜欢的球星</h1>
+        都喜欢 <input type="checkbox"/>
+        库里 <input type="checkbox"/>
+        詹姆斯 <input type="checkbox"/>
+        哈登 <input type="checkbox"/>
+    </div>
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script type="text/javascript">
+        //console.log($('.special-item'))
+        //console.log($("input[type='checkbox']").val())
+
+        $('input').eq(0).val(function(idx,oldValue){
+            return oldValue+' 新属性值';
+        })
+
+        $('button').click(function(){
+            $(this).next().css('fontSize','30px')
+        })
+
+        $('div h1  ').eq(0).click(function(){
+           if( $('div h1 input').eq(0).prop('checked')){
+            $(this).nextAll().prop('checked',true)
+           }
+        })
+
+    </script>
+</body>
+</html>

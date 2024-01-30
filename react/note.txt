@@ -1,0 +1,355 @@
+React: 构建用户页面的JavaScript库; 不是框架
+React主观意愿：
+1. React 仅仅负责View层渲染
+2. 我是一个视图渲染的工具库，不做框架的事情
+
+
+
+简单使用React
+1. 添加根容器： div.app
+2. 引入cdn脚本
+3. 创建React组件
+
+
+React -> React API -处理视图APi集合
+从render函数 -> React DOM -> 虚拟DOM -> 真实DOM
+
+ReactDOM.render(
+    React.createElement('div',{
+        'data-tag': 'div'
+    },
+    'This is my first React experience',
+    document.getElementById('app'))
+)
+// react会创建一个虚拟节点，帮我们放入app节点中
+
+var span = React.createElement('span',{
+    className: 'text',
+    key: 1
+})
+ReactDOM.render(
+    React.createElement('div',{
+        'data-tag': 'div'
+    },
+    [span],
+    document.getElementById('app'))
+)
+
+
+npx npm5.2 + 的包运行工具
+create-react-app 内部的工程化： babel/webpack
+
+
+一个React组件：
+1. 继承React.Component
+2. render函数返回一个视图
+
+JSX是什么： 
+1. 一种标签语法；JS进行的语法扩展 
+2. 不是字符串，不是HTML标签
+3. 描述UI呈现与交互的直观表现形式 
+4. 生成React元素；
+
+createElement与JSX对比
+ // jsx的遵循js的命令规则，一般使用lowerCase
+const rEl = <h1 className="title">this is my first jsx experience</h1>
+
+const rEl = React.createElement('h1',{
+    className: 'title',
+},'this is my first jsx experience')
+
+React.render(
+    rel,
+    document.getElementById("app")
+)
+
+ 为什么React不把视图和逻辑分开呢
+ 1. 渲染和UI标记是有逻辑
+ 
+
+ JSX的插值表达式：
+ 表达式：一切有效的（符合JS编程逻辑的）表达式 { title }
+ JSX被编译以后-> React元素 -> 普通对象
+
+更新状态
+ ReactDOM.render(); 会深度对比新旧元素的状态，只做必要的真实DOM更新
+ 虚拟节点的对比；
+
+渲染之前 -> 每个React元素组成一个虚拟DOM的对象结构-> 渲染
+更新之前-> 形成新的虚拟DOM的对象结构 -> 对比新的旧的虚拟DOM节点
+分析出两者的不同点-> 形成一个DOM更新补丁->更新真实DOM
+
+
+组件：
+1. 组件 视图的片段
+2. 包含：视图标记、事件、数据、逻辑、外部的配置
+内部管理数据集合：state
+外部传入配置集合: props
+
+组件渲染的过程：
+1. React 主动调用Test组件
+2. 将属性集合转换对象 props => {'title': 'this is a class component'}
+3. 将对象作为props传入组件
+4. 替换JSX中的props或者state中的变量
+5. ReactDOM 将最终的React元素通过一系列操作转换成真实DOM，进行渲染
+
+
+组件调用规范：
+1. 视图标记时 HTML标签 <div></div>
+2. 大驼峰写法作为一个React元素 <Test/> -> jSX -> React元素
+3. 组件 转换 React元素  React.createElement(Test,{})
+4
+
+组合组件：
+title组件，author组件，paragraph组件
+class Title extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return (
+            <h1>{this.props.title}</h1>
+        )
+    }
+}
+
+class Author extends React.Component{
+    constructor(props){
+        super(props);
+    }
+    render(){
+        return (
+            <h1>{this.props.author}</h1>
+        )
+    }
+}
+
+class Paragraph extends React.Component{
+    constructor(props){
+       super(props)
+    }
+    render(){
+        return(
+            <p>{this.props.paragraph}</p>
+        )
+    }
+}
+
+class App extends React.Component{
+    constructor(props){
+        super(props)
+    }
+    state = {
+        title: 'This is as Title',
+        author: 'Xiaoye',
+        paragraph: 'shicoa'
+    }
+
+    return (){
+        return(
+            <div>
+            <Title title={this.state.title}/>
+            <Author author={this.state.author}/>
+            <Paragraph paragraph={this.state.paragraph}/>
+            </div>
+        )
+    }
+}
+
+ReactDom.render(
+    <App />,
+    document.getElementById('app)
+)
+
+组合嵌套：
+    Title
+        Author
+
+属性props/状态state区别
+1. state => 数据池{} 组件内部的管理数据的容器  组件内部可写可读
+2. props => 属性池{} 外部调用组件时传入的属性集合  组件内部可读不可写
+3.组件外部的数据 -> 组件内部时应该有权限修改的
+
+* 函数组件一定要是一个纯函数
+纯函数 能 保证 绝对的复用性； 
+    1. 相同的入参保证返回相同的结果
+    2. 不可以修改入参
+
+state 与setState 与单项数据流
+
+state: React核心，状态， 数据池，组件数据池，状态池
+
+// 组件已经被渲染到DOM中，以后运行
+// 组件已经被挂载到了真实DOM中后，运行的函数
+componentDidMount (){
+    this.t = setInterval(()=>{
+        this.setState({
+            dateTime: new Date().toString()
+        })
+    },1000)
+}
+// 组件即将被卸载时运行
+componentWillUnmount(){
+    clearInterval(this.t);
+    this.t = null
+}
+
+卸载一个组件：
+ReactDOM.unmountComponentAtNode(
+    document.getElementById('app');
+)
+
+总结：
+1. 如果想使用组件的时候，传入数据 - props 组件配置
+2. 如果是组件内部使用的数据 - state 私有数据（状态）
+
+state的使用注意事项
+1. 必须使用setState方法来更改state 
+2. 多个setState是会合并调用->合并原理 浅合并
+3. props和state更新数据要谨慎， 尽量避免直接依赖他们
+    很有可能在异步程序中更新
+
+组件无论如何都不知道其他组件是否是有状态的
+组件也不关心其他组件是函数组件还是类组件
+其他组件是无法读写修改该组件的state的
+
+单项数据流 -> 从上至下；从父向子类传递
+state只能传递给自己的子组件
+
+
+React事件处理
+DOM事件处理 addEventListener onclick = function(){}
+<button onclick='doSth'></button> 
+
+React元素也采用了类似于DOM0标准中的事件属性定义的方法
+JSX <button onClick={this.doSth}>click</button> 小驼峰
+
+React.createElement(
+    'button',
+    {
+        onClick : {this.doSth}
+    },
+    //children
+    'click'
+)
+
+React事件对象：
+    SyntheticBaseEvent: 合成基础事件对象 React重新定义
+
+为什么React要将事件处理直接在React元素上绑定？
+React一直认为事件处理跟视图是有程序上的直接关系的;事件处理和视图写在一起可以更加直观的表述视图与逻辑的关系
+
+
+// this指向
+//默认处理函数的this为undefined;ES6 class 模块默认是不对事件处理函数进行this的再绑定
+解决this的方法：
+    1. bind(this)=> 构造器 this.doSth= this.doSth.bind(this);
+    2. bind(this)=>视图标记中 onClick = {this.doSth.bind(this)}
+    3. 回调 + 箭头函数 onClick={()->this.doSth()}
+        render函数每次执行的时候，都会创建一个新的回调；  
+        给子组件的属性进行传递函数的时候，每次都要新创建一个回调
+        子组件每次都会接受一个新的函数，触发子组件的render
+
+条件渲染
+class LoginForm extends React.Component{
+    state={
+        username:'',
+        password:''
+    }
+    handleUserNameChange = (e)=>{
+        this.setState({
+            username: e.target.name
+        })
+    }
+    login = ()=>{
+        // 解构
+        const {username,password} = this.state;
+        if(!username.length || !username.password){
+            alert('用户名密码不能为空')
+            return;
+        }
+        // 登陆操作
+    }
+    render(){
+        return{
+            <div>
+                <p>
+                    <input type='text' placeholder='用户名' onChange={
+                        (e)=>{
+                            this.setState({
+                                username: e.target.value
+                            })
+                        }
+                    }/>
+                </p>
+                <p>
+                    <input type='password' placeholder='密码'
+                    onChange={
+                        (e)=>{
+                            this.setState({
+                                username: e.target.value
+                            })
+                        }
+                    />
+                </p>
+                <p>
+                    <button onClick={this.login}>登录</button>
+                </p>
+            </div>
+        }
+    }
+}
+
+}
+
+
+
+列表渲染
+JSX -> map方法
+class App extends React.Component{
+    state = {
+        arr: [
+            {
+                id: 1,
+                name: '章三'
+            },
+             {
+                id: 2,
+                name: '李四'
+             },
+             {
+                id: 3,
+                name: '王五'
+             }
+
+        ]
+    }
+
+    render(){
+        return (  
+            <ul>
+                this.state.arr.map(item=>{
+                    return(
+                    <li> {item.id}</li>  
+                    <li>   {item.name}</li>
+                    )
+                })
+            </ul>
+        )
+    }
+}
+
+<table>
+    <tbody>
+    key是唯一的，是react查看元素是否改变的唯一标识；兄弟节点中的唯一；
+        <tr key=''>
+            <td>1</td>
+            <td>章三</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+

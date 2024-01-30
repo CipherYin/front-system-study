@@ -57,7 +57,6 @@
 // let 只会在当前块级作用域下生效
 // let本质是为了给js增加一个块级作用域；
 //  不建议在块级作用域当中   函数声明的方式 来声明函数， 而用函数表达式
-
 // function test(){
 //     console.log(a)
 //     let a = 10;
@@ -79,5 +78,25 @@
 
 
 // console.log(a)
+
+//  
+
+
+//const // 一旦定义必须赋值，值不能更改
+// 有块级作用域，不能提升，有暂时性死区
+// 与let 一样不能重复声明；
+// const a = 12;
+// a=13
+
+
+// const obj = {};
+// obj.name = 'zhangsan';
+
+// console.log(obj)
+
+
+//顶层对象 
+
+
 
 

@@ -1,0 +1,21 @@
+* 动画方法中的队列及原理剖析
+1） $('.container')
+    .queue('test',function(){
+        console.log(1)
+        next()
+    })
+    .queue('test',function(){
+        console.log(2)
+        next()
+    })
+    .queue('test',function(){
+        console.log(3)
+        next()
+    })
+
+2)  $('.container').dequeue('test')  
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>super、原型、symbol遍历</title>
+</head>
+<body>
+    
+</body>
+
+<script type="text/javascript">
+    // 自身的可枚举键名
+    const foo = {
+        a: 1,
+        b: 2,
+        c: 3
+    }
+    Object.defineProperties(foo,{
+        d: {
+            value: 4,
+            enumerable: true
+        }
+    })
+    // 自身可枚举属性；不继承属性
+    // Object.keys(obj) 自身可枚举属性；不继承属性
+    // Object.values(obj)
+    // Object.entries(obj): 返回数组[【key,value】]
+
+    let obj = {}
+    console.log(Object.keys(obj));
+    
+    
+
+    // super(指向的是对象的原型对象) --> this;
+    // 
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+        
+        // try-catch 捕获不到异步的异常；
+        // 异步: 难于维护，不变拓展，try....catch难以捕获异常
+        // 同步 执行 异步 操作
+        // 同步并发异步代码问题
+    //    try{
+    //        setTimeout(function(){
+    //            console.log(a);
+     //       },30)
+     //   }catch(e){
+      //      console.log(e);
+      //  }
+
+      // jquery的回调队列;回调对象管理
+      let cb = $.Callbacks();
+      console.log(cb);
+      function a(x,y){
+        console.log('a',x,y)
+      }
+      function b(x,y){
+        console.log('b',x,y)
+      }
+
+      cb.add(a,b)
+      // 执行回调队列的方法
+      cb.fire(10,20)
+
+      
+    </script>
+
+</body>
+</html>
